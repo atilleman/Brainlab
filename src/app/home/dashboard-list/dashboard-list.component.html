@@ -1,0 +1,19 @@
+<div class="dashboard-list">
+  <h2>Select Dashboard</h2>
+
+  <select [(ngModel)]="selectedId" (change)="selectDashboard()">
+    <option [value]="null">-- Select --</option>
+    <option *ngFor="let dash of dashboards$ | async" [value]="dash.id">
+      {{ dash.name }}
+    </option>
+  </select>
+
+  <div class="create-dashboard">
+    <button (click)="openCreateDashboardModal()">Create New Dashboard</button>
+
+    <ngx-smart-modal #createDashboardModal identifier="createDashboardModal">
+      <app-create-dashboard></app-create-dashboard>
+    </ngx-smart-modal>
+
+  </div>
+</div>

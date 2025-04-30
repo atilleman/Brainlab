@@ -1,0 +1,23 @@
+<div class="chart-widget">
+  <ng-container *ngIf="data$ | async as chartData">
+    <div class="chart-header">
+      <h4>{{ chartData.title }}</h4>
+      <button class="settings-button" (click)="openSettings()">⚙️ Settings</button>
+    </div>
+
+    <apx-chart
+      *ngIf="chartData.type !== 'pie'; else pieChart"
+      [series]="chartData.series"
+      [chart]="{ type: chartData.type, height: 350, width: '100%' }"
+      [xaxis]="chartData.xaxis">
+    </apx-chart>
+
+    <ng-template #pieChart>
+      <apx-chart
+        [series]="chartData.series"
+        [labels]="chartData.labels"
+        [chart]="{ type: 'pie', height: 350, width: '100%' }">
+      </apx-chart>
+    </ng-template>
+  </ng-container>
+</div>

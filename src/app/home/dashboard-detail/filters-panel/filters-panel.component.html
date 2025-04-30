@@ -1,0 +1,29 @@
+<div class="filters-panel">
+  <h2>Filters</h2>
+
+  <div class="filter-form">
+    <input type="text" placeholder="Field (e.g., Gender)" [(ngModel)]="field" />
+    
+    <select [(ngModel)]="operator">
+      <option value="=">=</option>
+      <option value=">">&gt;</option>
+      <option value="<">&lt;</option>
+      <option value="contains">Contains</option>
+    </select>
+    
+    <input type="text" placeholder="Value" [(ngModel)]="value" />
+    
+    <button (click)="addFilter()">+ Add Filter</button>
+  </div>
+
+  <div class="active-filters">
+    <h3>Active Filters</h3>
+
+    <div *ngFor="let filter of activeFilters$ | async; let i = index" class="filter-item">
+      {{ filter.field }} {{ filter.operator }} {{ filter.value }}
+      <button class="remove-button" (click)="removeFilter(i)">❌</button>
+    </div>
+  </div>
+</div>
+
+  

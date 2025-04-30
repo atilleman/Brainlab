@@ -1,0 +1,31 @@
+<ng-container *ngIf="dashboard$ | async as dashboard">
+  <div *ngIf="dashboard; else noDashboardSelected" class="dashboard-detail-layout">
+    
+    <button class="toggle-filters-button" (click)="toggleFilters()">
+      {{ showFilters ? 'Hide Filters' : 'Show Filters' }}
+    </button>
+
+    <div class="dashboard-content">
+      <div class="filters-side-panel" *ngIf="showFilters">
+        <app-filters-panel></app-filters-panel>
+      </div>
+
+      <div class="charts-area" [class.shifted]="showFilters">
+        <h2>{{ dashboard.name }}</h2>
+
+        <div class="chart-grid">
+          <app-chart-widget *ngFor="let chart of dashboard.charts" [chartId]="chart.id">
+          </app-chart-widget>
+        </div>        
+      </div>
+    </div>
+
+  </div>
+
+  <!-- If no dashboard selected yet -->
+  <ng-template #noDashboardSelected>
+    <div class="no-dashboard-message">
+      <h2>Please select a dashboard to view charts.</h2>
+    </div>
+  </ng-template>
+</ng-container>
